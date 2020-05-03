@@ -73,9 +73,15 @@ data2 = {'true_predictions': true_predictions,
 
 df = pd.DataFrame(data, columns= ['gender_real', 'gender_predicted'])
 df = df.append(data2, ignore_index=True)
+
+df = df.replace(np.nan, '', regex=True)
+
 print(df)
 
 df.to_csv('results.csv')
+
+np.savetxt('results.txt', df.values, fmt='%s',
+ delimiter='\t\t\t', header= "gender_real\tgender_predicted\tmodel_prediction_rate\ttrue_predictions" )
 
 #50
 #--------------------------------
